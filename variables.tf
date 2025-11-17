@@ -21,7 +21,9 @@ variable "availability_zone" {
 variable "key_pair_name" {
   description = "Existing EC2 Key pair name for SSH"
   type        = string
+  default     = "mykey"
 }
+
 
 variable "bastion_ssh_from" {
   description = "CIDR allowed to SSH to bastion (for demo 0.0.0.0/0 but restrict in prod)"
