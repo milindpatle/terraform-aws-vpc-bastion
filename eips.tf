@@ -1,5 +1,5 @@
 resource "aws_eip" "bastion_static" {
-  domain = true
+  domain = "vpc"
 
   tags = {
     Name = "bastion-static-eip"
@@ -11,7 +11,7 @@ resource "aws_eip" "bastion_static" {
 }
 
 resource "aws_eip" "nat_static" {
-   domain = true
+   domain = "vpc  "
 
   tags = {
     Name = "nat-static-eip"
