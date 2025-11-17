@@ -3,6 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Installing Terraform 1.13.4"
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.13.4/terraform_1.13.4_linux_amd64.zip
       - unzip terraform.zip
       - mv terraform /usr/local/bin/
@@ -10,19 +11,20 @@ phases:
 
   pre_build:
     commands:
-      - echo "Listing repo files"
-      - ls -la
-      - echo "terraform init"
-      - terraform init
+      - echo "Cleaning previous plan files"
+      - rm -f tfplan
+      - rm -f .terraform.lock.hcl
+      - echo "Initializing Terraform"
+      - terraform init -upgrade
 
   build:
     commands:
-      - echo "terraform plan"
+      - echo "Running Terraform Plan"
       - terraform plan -out=tfplan
 
   post_build:
     commands:
-      - echo "terraform apply"
+      - echo "Applying Terraform Plan"
       - terraform apply -auto-approve tfplan
 
 artifacts:
