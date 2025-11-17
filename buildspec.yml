@@ -4,17 +4,20 @@ phases:
   install:
     commands:
       - yum update -y
-      - yum install -y unzip
-      - curl -O https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
-      - unzip terraform_1.6.6_linux_amd64.zip -d /usr/local/bin/
+      - yum install -y unzip wget
+      - wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
+      - unzip terraform_1.6.6_linux_amd64.zip
+      - mv terraform /usr/local/bin/
+      - terraform -version
 
   pre_build:
     commands:
-      - cd terraform-aws-vpc-bastion
+      - echo "Running terraform init"
       - ls -R
       - terraform init
 
   build:
     commands:
-      - cd terraform-aws-vpc-bastion
+      - echo "Running terraform plan and apply"
       - terraform plan -out=tfplan
+      - terraform apply -auto-approve tfplan
