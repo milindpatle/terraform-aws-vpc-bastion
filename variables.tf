@@ -1,31 +1,35 @@
 variable "aws_region" {
+  type    = string
   default = "ap-south-1"
 }
 
 variable "vpc_cidr" {
+  type    = string
   default = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
+  type    = string
   default = "10.0.1.0/24"
 }
 
-variable "bastion_ami" {
-  default = "ami-03695d52f0d883f65"
+variable "availability_zone" {
+  type    = string
+  default = null
 }
 
-variable "proxy_ami" {
-  default = "ami-03695d52f0d883f65"
+variable "key_pair_name" {
+  description = "Existing EC2 Key pair name for SSH"
+  type        = string
+}
+
+variable "bastion_ssh_from" {
+  description = "CIDR allowed to SSH to bastion (for demo 0.0.0.0/0 but restrict in prod)"
+  type        = string
+  default     = "0.0.0.0/0"
 }
 
 variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "key_name" {
-  default = "mykey"   
-}
-
-variable "ssh_cidr" {
-  default = "0.0.0.0/0"   
+  type    = string
+  default = "t3.micro"
 }

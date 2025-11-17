@@ -4,20 +4,28 @@ phases:
   install:
     commands:
       - yum update -y
-      - yum install -y unzip wget
-      - wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
-      - unzip terraform_1.6.6_linux_amd64.zip
-      - mv terraform /usr/local/bin/
-      - terraform -version
+      - yum install -y unzip
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
+      - unzip terraform.zip -d /usr/local/bin/
+      - terraform --version
 
   pre_build:
     commands:
-      - echo "Running terraform init"
-      - ls -R
+      - echo "Listing repo files"
+      - ls -la
+      - echo "terraform init"
       - terraform init
 
   build:
     commands:
-      - echo "Running terraform plan and apply"
+      - echo "terraform plan"
       - terraform plan -out=tfplan
+
+  post_build:
+    commands:
+      - echo "terraform apply"
       - terraform apply -auto-approve tfplan
+
+artifacts:
+  files:
+    - '**/*'
