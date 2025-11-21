@@ -1,8 +1,7 @@
 🚀 Terraform AWS VPC Project with Bastion & Proxy 
 
-This project creates a complete AWS public network architecture using Terraform, deploys a Bastion Server, a Proxy Server, NAT Gateway, Internet Gateway, and sets up CI/CD using AWS CodePipeline + AWS CodeBuild.
-
-This project does NOT use S3 remote backend or DynamoDB lock — Terraform state is local.
+TA complete AWS public-network architecture built using Terraform, including VPC, Subnets, Internet Gateway, NAT Gateway, Bastion EC2, Proxy EC2, and a full CI/CD pipeline using AWS CodePipeline + CodeBuild.
+Terraform state is local only — no S3 backend or DynamoDB locking.
 
 📁 Project File Structure
 terraform-aws-vpc-bastion/
